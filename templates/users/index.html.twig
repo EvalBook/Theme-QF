@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'templates' %}
+
+{% block title %}
+    {{ 'users.title.management' | trans }}
+{% endblock %}
+
+{% block sidebar %}
+    {% include '_partials/sidebar.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="row mt-4">
+
+        {% if is_granted('ROLE_USER_LIST_ALL') %}
+            {% include '_partials/card.html.twig' with {
+                'title': 'users.label.view-list' | trans,
+                'content': 'users.description.view-list' | trans,
+                'label': 'users.button.view-list' | trans,
+                'action': path('users_list')
+            }%}
+        {% endif %}
+
+        {% if is_granted('ROLE_USER_CREATE') %}
+            {% include '_partials/card.html.twig' with {
+                'title': 'users.label.add' | trans,
+                'content': 'users.description.add' | trans,
+                'label': 'users.button.add' | trans,
+                'action': path('users_add')
+            }%}
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+            {% include '_partials/card.html.twig' with {
+                'title': 'users.label.add-admin' | trans,
+                'content': 'users.description.add-admin' | trans,
+                'label': 'users.button.add-admin' | trans,
+                'action': path('users_add_admin')
+            }%}
+        {% endif %}
+
+    </div>
+    <div class="row mt-4">
+
+        {% if is_granted('ROLE_USER_EDIT') %}
+            {% include '_partials/card.html.twig' with {
+                'title': 'users.label.edit' | trans,
+                'content': 'users.description.edit' | trans,
+                'label': 'users.button.edit' | trans,
+                'action': path('users_edit')
+            }%}
+        {% endif %}
+
+        {% if is_granted('ROLE_USER_DELETE') %}
+            {% include '_partials/card.html.twig' with {
+                'title': 'users.label.delete' | trans,
+                'content': 'users.description.delete' | trans,
+                'label': 'users.button.delete' | trans,
+                'action': path('users_delete')
+            }%}
+        {% endif %}
+    </div>
+
+{% endblock %}
